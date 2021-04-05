@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <%- include('./partials/headlink'); %>
+    <link rel="stylesheet" href="/assets/css/main2.css" />
+</head>
+
+<body>
+    <%- include('./partials/header'); %>
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Apply Letter of Interest</h1>
+                        <p>
+                            Terima kasih atas ketertarikan anda mendukung implementasi
+                            <br>pertumbuhan hijau, khususnya di Kabupaten Kubu Raya.
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li>
+                            <a href="detail-indikator">Kembali</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="add-resume section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 col-12">
+                    <div class="add-resume-inner box">
+                        <div class="post-header align-items-center justify-content-center">
+                            <h3>Detail Letter of Interest</h3>
+                        </div>
+                        <form class="form-ad" action="/auth/loi" method="POST">
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Pengirim</label>
+                                        <input type="text" class="form-control" placeholder="Name" name="pengirim">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" class="form-control" placeholder="Your@domain.com"
+                                            name="email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Afiliasi</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Mis. Yayasan Inisiatif Dagang Hijau" name="afiliasi">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Website Afiliasi</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Mis. https://www.idhsustainabletrade.com/" name="web_afiliasi">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label>Jenis Afiliasi</label>
+                                        <select class="form-control" name="jenis_afiliasi">
+                                            <option value="Government">Government</option>
+                                            <option value="Non-Government Organization">Non-Government Organization
+                                            </option>
+                                            <option value="Private Sector">Private Sector</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Negara</label>
+                                        <select class="form-control selectpicker countrypicker" name="negara"></select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div id="multiCheck" class="form-group newform">
+
+                                        <label style="display: block;" class="control-label">Ketertarikan</label>
+
+                                        <input class="checknew" type="checkbox" name=""
+                                            value="Pertumbuhan Ekonomi Berkelanjutan">
+                                        <label style="display: inline;font-size: 14px;">
+                                            Pertumbuhan Ekonomi Berkelanjutan</label><br>
+
+                                        <input class="checknew" type="checkbox" name=""
+                                            value="Pertumbuhan Yang Inklusif Dan Adil">
+                                        <label style="display: inline;font-size: 14px;" for="">
+                                            Pertumbuhan Yang Inklusif Dan Adil</label><br>
+
+                                        <input class="checknew" type="checkbox" name=""
+                                            value="Pengurangan Emisi Gas Rumah Kaca">
+                                        <label style="display: inline;font-size: 14px;" for="">
+                                            Pengurangan Emisi Gas Rumah Kaca</label><br>
+
+                                        <input class="checknew" type="checkbox" name=""
+                                            value="Ekosistem Yang Sehat Dan Produktif">
+                                        <label style="display: inline;font-size: 14px;" for="">
+                                            Ekosistem Yang Sehat Dan Produktif</label><br>
+
+                                        <input class="checknew" type="checkbox" name=""
+                                            value="Ketahanan Sosial, Ekonomi Dan Lingkungan">
+                                        <label style="display: inline;font-size: 14px;" for="">
+                                            Ketahanan Sosial, Ekonomi Dan Lingkungan</label><br>
+
+                                        <input id="ket_fin" type="hidden" name="ketertarikan">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Tertarik Menjadi</label>
+                                        <select class="form-control" name="role">
+                                            <option value="Funding">Funding</option>
+                                            <option value="Investor">Investor</option>
+                                            <option value="Mitra Kerja">Mitra Kerja</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Deskripsi</label>
+                                <textarea class="form-control" rows="7" name="deskripsi"></textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="choose-img" name="file">
+                                    <p>Atau Upload Dokumen (Optional)</p>
+                                    <label for="img">Pilih Dokumen:</label>
+                                    <input type="file" id="img" name="img" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                                            text/plain, application/pdf, image/*">
+                                    <p>Maximum file size: 2 MB</p>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn" onclick="SubmitLoi()"><i
+                                            class="lni lni-telegram"></i> Kirim
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade form-modal" id="login" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog max-width-px-840 position-relative">
+            <button type="button"
+                class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper"
+                data-dismiss="modal">
+                <i class="lni lni-close"></i>
+            </button>
+            <div class="login-modal-main">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="heading">
+                                <h3>Login From Here</h3>
+                                <p>Log in to continue your account
+                                    <br> and explore new jobs.
+                                </p>
+                            </div>
+                            <div class="social-login">
+                                <ul>
+                                    <li>
+                                        <a class="linkedin" href="#">
+                                            <i class="lni lni-linkedin-original"></i> Log in with LinkedIn
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="google" href="#">
+                                            <i class="lni lni-google"></i> Log in with Google
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="facebook" href="#">
+                                            <i class="lni lni-facebook-original"></i> Log in with Facebook
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="or-devider">
+                                <span>Or</span>
+                            </div>
+                            <form action="/">
+                                <div class="form-group">
+                                    <label for="email" class="label">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="example@gmail.com" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="label">Password</label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Enter password">
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex flex-wrap justify-content-between">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="flexCheckDefault" />
+                                        <label class="form-check-label" for="flexCheckDefault">Remember password</label>
+                                    </div>
+                                    <a href="" class="font-size-3 text-dodger line-height-reset">Forget Password</a>
+                                </div>
+                                <div class="form-group mb-8 button">
+                                    <button class="btn ">Log in
+                                    </button>
+                                </div>
+                                <p class="text-center create-new-account">Don’t have an account?
+                                    <a href="#">Create a free account</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade form-modal" id="signup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog max-width-px-840 position-relative">
+            <button type="button"
+                class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper"
+                data-dismiss="modal">
+                <i class="lni lni-close"></i>
+            </button>
+            <div class="login-modal-main">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="heading">
+                                <h3>Create a free Account
+                                    <br> Today
+                                </h3>
+                                <p>Create your account to continue
+                                    <br> and explore new jobs.</p>
+                            </div>
+                            <div class="social-login">
+                                <ul>
+                                    <li>
+                                        <a class="linkedin" href="#">
+                                            <i class="lni lni-linkedin-original"></i> Import from LinkedIn
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="google" href="#">
+                                            <i class="lni lni-google"></i> Import from Google
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="facebook" href="#">
+                                            <i class="lni lni-facebook-original"></i> Import from Facebook
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="or-devider">
+                                <span>Or</span>
+                            </div>
+                            <form action="/">
+                                <div class="form-group">
+                                    <label for="email" class="label">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="example@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="label">Password</label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control" placeholder="Enter password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="label">Confirm Password</label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control" placeholder="Enter password">
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex flex-wrap justify-content-between">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="">
+                                        <label class="form-check-label" for="flexCheckDefault">Agree to the
+                                            <a href="#">Terms & Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-8 button">
+                                    <button class="btn ">Sign Up
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer'); %>
+
+    <%- include('./partials/footlink'); %>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select-country.min.js"></script>
+
+    <script>
+        function SubmitLoi() {
+            let x = []
+            let a = document.getElementById('multiCheck').querySelectorAll('input:checked')
+
+            for (let i = 0; i < a.length; i++) {
+                let newVal = '_' + a[i].value
+                x.push(newVal)
+            }
+            let u = document.getElementById('ket_fin').value = x
+        }
+    </script>
+</body>
+
+</html>

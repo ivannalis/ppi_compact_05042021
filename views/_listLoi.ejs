@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <%- include('./partials/_adminheader'); %>
+            <div class="app-container">
+                <%- include('./partials/_adminnav'); %>
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title mb-2 mb-sm-0">
+                                        <h1>Clients</h1>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html"><i class="ti ti-home"></i></a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Pages
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">
+                                                    Clients</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-statistics clients-contant">
+                                    <div class="card-body py-0 table-responsive">
+                                        <table id="LoiTable" class="table clients-contant-table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Pengirim</th>
+                                                    <th scope="col">Afiliasi</th>
+                                                    <th scope="col">Negara</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Tanggal Applied</th>
+                                                    <th scope="col">Edit & Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(applyer.length!=0){
+                                                 let i=1;
+                                                 applyer.forEach(function(data){ %>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <!-- <div class="bg-img mr-4">
+                                                                <img src="assets/img/avtar/01.jpg" class="img-fluid"
+                                                                    alt="Clients-01">
+                                                            </div> -->
+                                                            <p class="font-weight-bold" style="margin:0px">
+                                                                <%=data.pengirim %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%=data.afiliasi %>
+                                                    </td>
+                                                    <td>
+                                                        <%=data.negara %>
+                                                    </td>
+                                                    <td id="tdList">
+                                                        <input name="status" type="number" value="<%=data.status %>">
+                                                    </td>
+                                                    <td>
+                                                        <%=data.tanggal %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/auth/editLoi/<%=data.id_loi%>"
+                                                            class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+                                                            <i class=" lni lni-pencil"></i>
+                                                        </a>
+                                                        <a id="<%=data.id_loi%>" onclick="alertDelete()"
+                                                            class="btn btn-icon btn-outline-danger btn-round">
+                                                            <i class="lni lni-close"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <% i++; }) %>
+                                                <% } else { %>
+                                                <tr>
+                                                    <td colspan="6">Belum ada applyers</td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/_adminfooter'); %>
+        </div>
+    </div>
+    <%- include('./partials/_deleteConfirm'); %>
+    <!-- end app -->
+    <script>
+        function OkeDelete() {
+            if (input.value != 'ppi compact' || input.value === '') {
+                wrong.style.display = 'block'
+            } else {
+                window.location = '/auth/deleteLoi/' + sn
+            }
+        }
+
+        let table = document.getElementById('LoiTable')
+
+        for (let a = 1; a < table.rows.length; a++) {
+            let c = table.rows[a].cells[3]
+            let selector = c.querySelector('input').value
+            let inp = document.getElementById('tdList')
+
+            if (selector == 1) {
+                c.innerHTML = '<a id="status" class="dot"></a><span>Approve</span>'
+            } else {
+                c.innerHTML = '<a id="status" class="dot bg-danger"></a><span>Hide</span>'
+
+            }
+        }
+    </script>
+</body>
+
+
+</html>

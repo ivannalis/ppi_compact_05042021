@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+<style>
+    select.form-control:not([size]):not([multiple]) {
+        height: 33px;
+    }
+</style>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <%- include('./partials/_adminheader'); %>
+            <div class="app-container">
+                <%- include('./partials/_adminnav'); %>
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        <!-- start-clients contant-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 col-12">
+                                    <div class="add-resume-inner box">
+                                        <div class="post-header align-items-center justify-content-center">
+                                            <h3>Detail Letter of Interest</h3>
+                                        </div>
+                                    </div>
+                                    <form method="POST">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-12">
+                                                <label class="control-label">Status</label>
+                                                <input id="oldStatus" type="hidden" class="form-control" name="status2"
+                                                    value="<%=detailLoi.status%>" disabled>
+                                                <div class="form-group">
+                                                    <select class="form-control" name="status" id="NewStatus"
+                                                        onchange="StatusVal()">
+                                                        <option id="0" value="0">Hide</option>
+                                                        <option id="1" value="1">Approve</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <input type="hidden" class="form-control" name="id_loi"
+                                                    value="<%=detailLoi.id_loi%>">
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Nama Pengirim</label>
+                                                    <input type="text" class="form-control" name="pengirim"
+                                                        value="<%=detailLoi.pengirim%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email</label>
+                                                    <input type="text" class="form-control"
+                                                        value="<%=detailLoi.email%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Afiliasi</label>
+                                                    <input type="text" class="form-control" name="afiliasi"
+                                                        value="<%=detailLoi.afiliasi%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Website Afiliasi</label>
+                                                    <input type="text" class="form-control" name="web_afiliasi"
+                                                        value="<%=detailLoi.web_afiliasi%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label>Jenis Afiliasi</label>
+                                                    <input id="jenis_afiliasi2" type="hidden" class="form-control"
+                                                        name="jenis_afiliasi2" value="<%=detailLoi.jenis_afiliasi%>"
+                                                        disabled>
+                                                    <select class="form-control" name="jenis_afiliasi"
+                                                        id="jenis_afiliasi">
+                                                        <option id="Government" value="Government">Government</option>
+                                                        <option id="Non-GovernmentOrganization"
+                                                            value="Non-Government Organization">
+                                                            Non-Government
+                                                            Organization</option>
+                                                        <option id="PrivateSector" value="Private Sector">Private
+                                                            Sector
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Negara</label>
+                                                    <input id="old_negara" type="hidden" class="form-control"
+                                                        name="negara2" value="<%=detailLoi.negara%>" disabled>
+                                                    <select class="form-control selectpicker countrypicker"
+                                                        name="negara"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div id="multiCheck" class="form-group newform">
+                                                    <label style="display: block;"
+                                                        class="control-label">Ketertarikan</label>
+                                                    <textarea class="form-control" name="ketertarikan" rows="7"><%=detailLoi.ketertarikan%>
+                                                        </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Tertarik Menjadi</label>
+                                                    <input id="detail_role" class="form-control" type="hidden"
+                                                        name="ketertarikan2" value="<%=detailLoi.role%>" disabled>
+                                                    <select class="form-control" name="role" id="newValrole"
+                                                        onchange="changeRole()">
+                                                        <option id="Funding" value="Funding">Funding</option>
+                                                        <option id="Investor" value="Investor">Investor</option>
+                                                        <option id="MitraKerja" value="Mitra Kerja">Mitra Kerja</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Deskripsi</label>
+                                            <textarea class="form-control" rows="7"
+                                                name="deskripsi"><%=detailLoi.deskripsi%></textarea>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="form-group">
+                                            <div class="button">
+                                                <button type="submit" class="btn" onclick="SubmitLoi()">
+                                                    <iclass="lni lni-telegram"></i> Kirim
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./partials/_adminfooter'); %>
+    </div>
+
+    <%- include('./partials/_deleteConfirm'); %>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap-select-country.min.js"></script>
+    <!-- end app -->
+    <script>
+        // define existing status value
+        let existStat = document.getElementById('oldStatus').value
+        document.getElementById(existStat).selected = true
+
+        let type = document.getElementById('jenis_afiliasi2').value
+        document.getElementById(type.replace(/\s/g, '')).selected = true
+
+        let role = document.getElementById('detail_role').value
+        document.getElementById(role.replace(/\s/g, '')).selected = true
+
+        let negara = document.getElementById('old_negara').value
+        document.getElementById(negara.replace(/\s/g, '')).selected = true
+    </script>
+</body>
+
+
+</html>

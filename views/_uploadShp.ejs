@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin app-header -->
+            <%- include('./partials/_adminheader'); %>
+            <!-- begin app-container -->
+            <div class="app-container">
+                <!-- begin app-nabar -->
+                <%- include('./partials/_adminnav'); %>
+                <!-- begin app-main -->
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title mb-2 mb-sm-0">
+                                        <h1>Form Kategori SHP</h1>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html">
+                                                        <i class="ti ti-home"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Forms
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">
+                                                    Kategori SHP</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div class="card-header">
+                                        <div class="card-heading">
+                                            <h4 class="card-title">Tambah Peta</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/auth/_uploadShp" method="POST" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label for="type_shp">Type</label>
+                                                <select class="form-control" name="type_shp"
+                                                    enctype="multipart/form-data">
+                                                    <option value="point">Point</option>
+                                                    <option value="line">Line</option>
+                                                    <option value="polygon">Polygon</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nama_shp">Nama Layer</label>
+                                                <input type="text" class="form-control" id="nama_shp"
+                                                    placeholder="Mis. Penutupan Lahan" name="nama_shp"
+                                                    required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="sumber_shp">Sumber</label>
+                                                <input type="text" class="form-control" id="sumber_shp"
+                                                    placeholder="Mis. SK733 Kawasan Hutan" name="sumber_shp">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_kat_shp">Kategori</label>
+                                                <select class="form-control" name="id_kat_shp"
+                                                    enctype="multipart/form-data">
+                                                    <%
+                                                if(kat_shp.length!=0){
+                                                let i=1;
+                                                kat_shp.forEach(function(data){
+                                                %>
+                                                    <option value="<%=data.id%>">
+                                                        <%=data.kategori%>
+                                                    </option>
+                                                    <%  i++; }) %>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="status_shp">Visibilitas</label>
+                                                <select class="form-control" name="status_shp"
+                                                    enctype="multipart/form-data">
+                                                    <option value="0">Hide</option>
+                                                    <option value="1">Visible</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Deskripsi</label>
+                                                <textarea class="form-control" rows="7" name="deskripsi_shp"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="path_shp">Upload Layer (*.geojson)</label><br>
+                                                <input type="file" id="path_shp" name="path_shp" accept=".geojson"
+                                                    required>
+                                                <p>Maximum file size: 15 MB</p>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add
+                                                <i class="lni lni-arrow-right"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div id="map" style="width: 600px; height: 450px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/_adminfooter'); %>
+        </div>
+    </div>
+    <!-- <script src="assets/js/map.js"></script> -->
+    <script src="assets/js/additional.js"></script>
+    <script src="assets/js/leaflet.ajax.js"></script>
+    <script src="assets/js/addjson.js"></script>
+    <script>
+        var mymap = L.map('map').setView([
+            -0.3785205, 109.5105676
+        ], 8);
+
+        L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(mymap);
+
+        function ReadPath() {
+            let val = document.getElementById('geojson').value
+            let x = new L.GeoJSON.AJAX(val)
+                .addTo(mymap)
+            let split = val.toString().slice(
+                val.lastIndexOf(' ') + 1
+            );
+            console.log(split)
+        }
+    </script>
+
+</body>
+
+</html>

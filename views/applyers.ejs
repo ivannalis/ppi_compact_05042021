@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <%- include('./partials/headlink'); %>
+    <link rel="stylesheet" href="/assets/css/main2.css" />
+</head>
+<style>
+    .section {
+        padding-bottom: 0px !important
+    }
+
+    #LoiTable td {
+        padding-top: 12px
+    }
+
+    .table {
+        border-color: #f6f9fc;
+        border: 1px solid #eee;
+    }
+
+    table {
+        counter-reset: rowNumber + 1;
+    }
+
+    table tr {
+        counter-increment: rowNumber;
+    }
+
+    table tr td:first-child::before {
+        content: counter(rowNumber);
+        min-width: 1em;
+        margin-right: 0.5em;
+    }
+</style>
+
+<body>
+    <%- include('./partials/header'); %>
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Project Applyers</h1>
+                        <p>
+                            Lihat detail mitra-mitra pertumbuhan hijau Kabupaten Kubu Raya<br> dan pantau terus project
+                            kami yang sedang berjalan.
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li>
+                            <a href="index.html">Kembali</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="manage-applications section">
+        <div class="container">
+            <div class="alerts-inner">
+                <div class="row">
+                    <div class="col-lg-4 col-12">
+                        <div class="dashbord-sidebar">
+                            <ul>
+                                <li class="heading">Project Applyers</li>
+                                <li>
+                                    <a class="active">
+                                        <i class="lni lni-envelope"></i> Letter of Interest
+                                        <span class="notifi"><%= applyer.length %></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="lni lni-clipboard"></i> Negosiasi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="lni lni-bookmark"></i> Project Contracting</a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="lni lni-alarm"></i> Project Running
+                                        <span class="notifi">0</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="lni lni-briefcase"></i> Project Closing</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-12" style="border-radius:6px">
+                        <table id="LoiTable" class="table clients-contant-table mb-0"
+                            style="background-color: #fff;border-radius: 6px">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Pengirim</th>
+                                    <th scope="col">Jenis Afiliasi</th>
+                                    <th scope="col">Afiliasi</th>
+                                    <th scope="col">Negara</th>
+                                    <th scope="col">Tanggal Applied</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if(applyer.length!=0){ var i=1;
+                                            applyer.forEach(function(data){ %>
+                                <tr>
+                                    <td valign='middle'>
+
+                                    </td>
+                                    <td valign='middle'>
+                                        <div class="d-flex align-items-center">
+                                            <!-- <div class="bg-img mr-4">
+                                                <img src="/assets\images\logo\idh.png" class="img-fluid"
+                                                    alt="Clients-01" width="30">
+                                            </div> -->
+                                            <p class="font-weight-bold">
+                                                <%=data.pengirim %>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td valign='middle'>
+                                        <%=data.jenis_afiliasi %>
+                                    </td>
+                                    <td valign='middle'>
+                                        <%=data.afiliasi %>
+                                    </td>
+                                    <td valign='middle'>
+                                        <%=data.negara %>
+                                    </td>
+                                    <td valign='middle'>
+                                        <%=data.tanggal %>
+                                    </td>
+                                </tr>
+                                <% i++; }) %>
+                                <% } else { %>
+                                <tr>
+                                    <td colspan="6" valign='middle'>Belum ada applyers</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade form-modal" id="login" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog max-width-px-840 position-relative">
+                <button type="button"
+                    class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper"
+                    data-dismiss="modal">
+                    <i class="lni lni-close"></i>
+                </button>
+                <div class="login-modal-main">
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="heading">
+                                    <h3>Login From Here</h3>
+                                    <p>Log in to continue your account
+                                        <br> and explore new jobs.
+                                    </p>
+                                </div>
+                                <div class="social-login">
+                                    <ul>
+                                        <li>
+                                            <a class="linkedin" href="#">
+                                                <i class="lni lni-linkedin-original"></i> Log in with LinkedIn</a>
+                                        </li>
+                                        <li>
+                                            <a class="google" href="#">
+                                                <i class="lni lni-google"></i> Log in with Google</a>
+                                        </li>
+                                        <li>
+                                            <a class="facebook" href="#">
+                                                <i class="lni lni-facebook-original"></i> Log in with Facebook</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="or-devider">
+                                    <span>Or</span>
+                                </div>
+                                <form action="/">
+                                    <div class="form-group">
+                                        <label for="email" class="label">E-mail</label>
+                                        <input type="email" class="form-control" placeholder="example@gmail.com"
+                                            id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="label">Password</label>
+                                        <div class="position-relative">
+                                            <input type="password" class="form-control" id="password"
+                                                placeholder="Enter password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-wrap justify-content-between">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault" />
+                                            <label class="form-check-label" for="flexCheckDefault">Remember
+                                                password</label>
+                                        </div>
+                                        <a href="" class="font-size-3 text-dodger line-height-reset">Forget Password</a>
+                                    </div>
+                                    <div class="form-group mb-8 button">
+                                        <button class="btn ">Log in
+                                        </button>
+                                    </div>
+                                    <p class="text-center create-new-account">Don’t have an account?
+                                        <a href="#">Create a free account</a>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade form-modal" id="signup" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog max-width-px-840 position-relative">
+                <button type="button"
+                    class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper"
+                    data-dismiss="modal">
+                    <i class="lni lni-close"></i>
+                </button>
+                <div class="login-modal-main">
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="heading">
+                                    <h3>Create a free Account
+                                        <br> Today
+                                    </h3>
+                                    <p>Create your account to continue
+                                        <br> and explore new jobs.</p>
+                                </div>
+                                <div class="social-login">
+                                    <ul>
+                                        <li>
+                                            <a class="linkedin" href="#">
+                                                <i class="lni lni-linkedin-original"></i> Import from LinkedIn</a>
+                                        </li>
+                                        <li>
+                                            <a class="google" href="#">
+                                                <i class="lni lni-google"></i> Import from Google</a>
+                                        </li>
+                                        <li>
+                                            <a class="facebook" href="#">
+                                                <i class="lni lni-facebook-original"></i> Import from Facebook</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="or-devider">
+                                    <span>Or</span>
+                                </div>
+                                <form action="/">
+                                    <div class="form-group">
+                                        <label for="email" class="label">E-mail</label>
+                                        <input type="email" class="form-control" placeholder="example@gmail.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="label">Password</label>
+                                        <div class="position-relative">
+                                            <input type="password" class="form-control" placeholder="Enter password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="label">Confirm Password</label>
+                                        <div class="position-relative">
+                                            <input type="password" class="form-control" placeholder="Enter password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-wrap justify-content-between">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <label class="form-check-label" for="flexCheckDefault">Agree to the
+                                                <a href="#">Terms & Conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-8 button">
+                                        <button class="btn ">Sign Up
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./partials/footer'); %>
+
+        <%- include('./partials/footlink'); %>
+</body>
+
+</html>

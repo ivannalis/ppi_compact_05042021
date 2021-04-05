@@ -1,0 +1,55 @@
+<div class="modal" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModal" aria-modal="true"
+    style="padding-right: 17px; background-color: #00000080;">
+    <div class="modal-dialog" role="document">
+        <form action="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Tindakan</h5>
+                    <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="inputZip">
+                        <strong>Ketik ulang
+                        </strong>tulisan di bawah ini :</label>
+                    <p id="konfirmText2">ppi compact</p>
+                    <input type="text" id="confirm" class="form-control">
+                    <p class="wrongconfirm" id="konfirmText" style="display: none;">Maaf, konfirmasi text
+                        tidak sesuai sesuai......</p>
+                    <input id="sID" type="text" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeModal()" class="btn btn-danger"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" id="btn-sub-confirm" onclick="return OkeDelete()" class="btn btn-success">Save
+                        changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let modal = document.getElementById('defaultModal')
+    let Editmodal = document.getElementById('defaultModalEdit')
+
+    let btnConfirm = document.getElementById('btn-sub-confirm')
+    let wrong = document.getElementById('konfirmText')
+    let input = document.getElementById('confirm')
+
+    let tbleIn = document.getElementById('sID')
+
+    let sn = ''
+    let esn = ''
+
+    function alertDelete() {
+        modal.style.display = 'block'
+        sn += event.srcElement.id
+    }
+
+    function closeModal() {
+        modal.style.display = 'none'
+        Editmodal.style.display = 'none'
+    }
+</script>

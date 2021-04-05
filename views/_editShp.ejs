@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <%- include('./partials/_adminheader'); %>
+            <div class="app-container">
+                <%- include('./partials/_adminnav'); %>
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        <!-- start-clients contant-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 col-12">
+                                    <div class="add-resume-inner box">
+                                        <div class="post-header align-items-center justify-content-center">
+                                            <h3>Detail SHP</h3>
+                                        </div>
+                                    </div>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-12">
+                                                <label class="control-label">Status</label>
+                                                <div class="form-group">
+                                                    <input id="oldStatus" type="hidden" class="form-control"
+                                                        name="old_stat" value="<%=shp.status_shp%>">
+                                                    <select class="form-control" name="status_shp" id="NewStatus"
+                                                        onchange="StatusVal()">
+                                                        <option id="0" value="0">Hide</option>
+                                                        <option id="1" value="1">Visible</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <input type="hidden" class="form-control" name="id_shp"
+                                                    value="<%=shp.id_shp%>">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nama SHP</label>
+                                                    <input type="text" class="form-control" name="nama_shp"
+                                                        value="<%=shp.nama_shp %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Sumber SHP</label>
+                                                    <input type="text" name="sumber_shp" class="form-control"
+                                                        value="<%=shp.sumber_shp %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="path_shp">Upload Layer (*.geojson)</label><br>
+                                                    <input type="file" id="path_shp" name="path_shp" accept=".geojson"
+                                                        value="<%=shp.path_shp%>">
+                                                    <p>Maximum file size: 15 MB</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <label>Kategori SHP</label>
+                                                    <input id="kat_shp" type="hidden" class="form-control"
+                                                        name="kat_shp" value="<%=shp.id_kat_shp %>" disabled>
+                                                    <select class="form-control" id="newkat_shp" name="id_kat_shp"
+                                                        onchange="changeKat_shp()" style="margin-top:10px">
+                                                        <%
+                                                        if(kat_shp.length!=0){
+                                                        let i=1;
+                                                        kat_shp.forEach(function(data){
+                                                        %>
+                                                        <option id="<%=data.id %>" value="<%=data.id %>">
+                                                            <%=data.kategori %></option>
+                                                        <%  i++; }) %>
+                                                        <% } %>
+                                                    </select>
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <label class="control-label">Deskripsi</label>
+                                                        <textarea class="form-control" rows="7"
+                                                            name="deskripsi_shp"><%=shp.deskripsi_shp%></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <div class="button">
+                                                        <button type="submit" class="btn">
+                                                            <i class="lni lni-telegram"></i> Kirim
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./partials/_adminfooter'); %>
+    </div>
+    <%- include('./partials/_deleteConfirm'); %>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select-country.min.js"></script>
+    <!-- end app -->
+    <script>
+        // define existing status value
+        let existStat = document.getElementById('oldStatus')
+        document.getElementById(existStat.value).selected = true
+
+        // define existing category value
+        let existKat = document.getElementById('kat_shp')
+        document.getElementById(existKat.value).selected = true
+    </script>
+</body>
+
+
+</html>

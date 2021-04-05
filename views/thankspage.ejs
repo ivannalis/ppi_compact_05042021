@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <%- include('./partials/headlink'); %>
+    <link rel="stylesheet" href="/assets/css/main2.css" />
+</head>
+
+<body>
+
+    <div class="maill-success">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="success-content">
+                        <h1><%= h1 %></h1>
+                        <h2><%= h2 %></h2>
+                        <p>
+                            <%= p %>
+                        </p>
+                        <div class="button">
+                            <a href="/" class="btn">Go To Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/glightbox.min.js"></script>
+
+    <script>
+        window.onload = function () {
+            window.setTimeout(fadeout, 500);
+        }
+
+        function fadeout() {
+            document.querySelector('#loading-area').style.opacity = '0';
+            document.querySelector('#loading-area').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+    <!-- vendor css -->
+    <!-- Load Leaflet from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.5.3/dist/esri-leaflet.js"
+        integrity="sha512-K0Vddb4QdnVOAuPJBHkgrua+/A9Moyv8AQEWi0xndQ+fqbRfAFd47z4A9u1AW/spLO0gEaiE1z98PK1gl5mC5Q=="
+        crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="/assets/js/leaflet.ajax.js"></script>
+
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin app-header -->
+            <%- include('./partials/_adminheader'); %>
+            <!-- begin app-container -->
+            <div class="app-container">
+                <!-- begin app-nabar -->
+                <%- include('./partials/_adminnav'); %>
+                <!-- begin app-main -->
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title mb-2 mb-sm-0">
+                                        <h1>Style SHP</h1>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html">
+                                                        <i class="ti ti-home"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Forms
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">
+                                                    Styling SHP</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div class="card-header">
+                                        <div class="card-heading">
+                                            <h4 class="card-title">Info SHP</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" id="id_edit" name="id_edit"
+                                                    value="<%=detailShp.id_shp%>" disabled>
+                                                <label for="Kategori">Informasi SHP</label>
+                                                <input type="text" class="form-control" id="nama_shp"
+                                                    placeholder="Mis. Penutupan Lahan" name="kategori"
+                                                    required="required" value="<%=detailShp.nama_shp%>">
+                                                <small id="emailHelp" class="form-text text-muted">Kategori digunakan
+                                                    untuk mengelompokan SHP di legenda.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="deskripsi">Deskripsi (Opsional)</label>
+                                                <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                                                    value="<%=detailShp.deskripsi_shp%>" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="style_by">Property Style</label>
+                                                <input type="text" class="form-control" id="style_by" name="style_by"
+                                                    value="<%=styleshp.style_by%>" disabled>
+                                            </div>
+                                            <button type="button" class="btn btn-primary" id="addstyle"
+                                                onclick="window.location = '/auth/styleShp/<%=detailShp.id_shp%>'">Tambah
+                                                Style
+                                                <i class="lni lni-add"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div class="card-header">
+                                        <div class="card-heading">
+                                            <h4 class="card-title">Styling SHP</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="tableedit"
+                                                class="table display responsive nowrap table-light table-bordered">
+                                                <tbody class="thead-light">
+                                                    <tr>
+                                                        <th>Properties</th>
+                                                        <th>Label</th>
+                                                        <th>Warna</th>
+                                                    </tr>
+                                                    <% if(styleshp.length!=0){
+                                                        let i=1;
+                                                        console.log('tes',styleshp[0].style_by)
+                                                        styleshp.forEach(function(data){ %>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="test" nama="id_style"
+                                                                value="<%= data.id_style %>" disabled>
+                                                        </td>
+                                                        <td><%= data.prop_shp %></td>
+                                                        <td><%= data.label_style %></td>
+                                                        <td>
+                                                            <input type="color" value="<%= data.color_prop %>" disabled>
+                                                        </td>
+                                                    </tr>
+                                                    <% i++; }) %>
+                                                    <% } else if(styleshp.length == 0 || styleshp[0].style_by === 'default') { %>
+                                                    <tr>
+                                                        <td colspan="6">Belum ada style</td>
+                                                    </tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                            <button type="button" id="editstyle" class="btn btn-danger"
+                                                onclick="EditSHP()"> <i class="lni lni-trash"></i>
+                                                Edit Style
+                                            </button>
+                                            <button type="button" id="deletestyle" class="btn btn-danger"
+                                                onclick="RemoveStyle()"> <i class="lni lni-trash"></i>
+                                                Delete Style
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="az-content-body">
+                                <div id="map" style="height: 800px;width:500px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/_adminfooter'); %>
+        </div>
+    </div>
+
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/glightbox.min.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
+    <script src="assets/js/additional.js"></script>
+
+    <script src="assets/js/addjson.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script>
+        let btnAdd = document.getElementById('addstyle')
+        let btnEdit = document.getElementById('editstyle')
+        let btnDelete = document.getElementById('deletestyle')
+
+        let b = "<%= styleshp.length %>"
+        let c = "<%= styleshp[0].style_by %>"
+        if (b == 0 || c === 'default') {
+            btnEdit.disabled = true
+            btnDelete.disabled = true
+        } else {
+            btnAdd.disabled = true
+        }
+
+        function EditSHP() {
+            let id = document.getElementById('id_edit').value
+            window.location = '/auth/editstyle/' + id
+        }
+
+        function RemoveStyle() {
+            let table = document.getElementById('tableedit')
+            let deleteStyleArr = []
+
+            for (let i = 1; i < table.rows.length; i++) {
+                let id_style = table.rows[i].cells[0]
+                let id_delete = id_style.querySelector("input").value
+                deleteStyleArr.push([id_delete])
+            }
+
+            $.ajax({
+                url: '/auth/detleteStyle/<%=detailShp.id_shp%>',
+                method: 'POST',
+                data: {
+                    val: deleteStyleArr
+                },
+                success: function (res) {
+                    alert('Style sukses diedit!')
+                    window.location = '/auth/detleteStyle/<%=detailShp.id_shp%>'
+
+                },
+                error: function (res) {
+                    alert('Ada yang tidak beres')
+                }
+            });
+            console.log(deleteStyleArr)
+        }
+    </script>
+</body>
+
+</html>

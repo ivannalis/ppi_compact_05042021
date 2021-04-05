@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <%- include('./partials/_adminheader'); %>
+            <div class="app-container">
+                <%- include('./partials/_adminnav'); %>
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title mb-2 mb-sm-0">
+                                        <h1>List SHP</h1>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html"><i class="ti ti-home"></i></a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Pages
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">
+                                                    Clients</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-statistics clients-contant">
+                                    <div class="card-body py-0 table-responsive">
+                                        <table id="LoiTable" class="table clients-contant-table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">SHP</th>
+                                                    <th scope="col">Kategori</th>
+                                                    <th scope="col">Deskripsi</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Sumber SHP</th>
+                                                    <th scope="col">Upload</th>
+                                                    <th scope="col">Edit</th>
+                                                    <th scope="col">Styling</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(shp.length!=0){ 
+                                                let i=1;
+                                                shp.forEach(function(data){ %>
+                                                <tr>
+                                                    <td>
+                                                        <input name="status" type="text" value="<%=data.type_shp %>">
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <a class="font-weight-bold" style="margin-bottom:0"
+                                                                href="/auth/detailShp/<%=data.id_shp%>">
+                                                                <%=data.nama_shp %>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%=data.kategori %>
+                                                    </td>
+                                                    <td id="tdList">
+                                                        <input name="status" type="text" value="<%=data.status_shp %>">
+                                                    </td>
+                                                    <td>
+                                                        <%=data.sumber_shp %>
+                                                    </td>
+                                                    <td>
+                                                        <%=data.tanggal %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/auth/editShp/<%=data.id_shp%>"
+                                                            class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+                                                            <i class=" lni lni-pencil"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a id="<%=data.id_shp%>" onclick="alertDelete(this)"
+                                                            class="btn btn-icon btn-outline-danger btn-round">
+                                                            <i class="lni lni-close"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="font-weight-bold" style="margin-bottom:0"
+                                                            href="/auth/detailStyle/<%=data.id_shp%>">
+                                                            Style
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <% i++; }) %>
+                                                <% } else { %>
+                                                <tr>
+                                                    <td colspan="6">Belum ada SHP</td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/_adminfooter'); %>
+        </div>
+    </div>
+    <%- include('./partials/_deleteConfirm'); %>
+    <!-- end app -->
+    <script>
+        function OkeDelete() {
+            if (input.value != 'ppi compact' || input.value === '') {
+                wrong.style.display = 'block'
+            } else {
+                window.location = '/auth/deleteShp/' + sn
+            }
+        }
+
+        let table = document.getElementById('LoiTable')
+
+        for (let a = 1; a < table.rows.length; a++) {
+            let c = table.rows[a].cells[3]
+            let type_shp = table.rows[a].cells[0]
+            let qr = type_shp.querySelector('input').value
+
+            let selector = c.querySelector('input').value
+            let inp = document.getElementById('tdList')
+            // console.log(selector)
+            if (selector == 1) {
+                c.innerHTML = '<a id="status" class="dot"></a><span>Visible</span>'
+            } else {
+                c.innerHTML = '<a id="status" class="dot bg-danger"></a><span>Hide</span>'
+            }
+
+            if (qr === 'point') {
+                type_shp.innerHTML =
+                    '<a style="text-align:center"><i class="fas fa-dot-circle" style="font-size:18px"></i></a>'
+            } else if (qr === 'line') {
+                type_shp.innerHTML =
+                    '<a style="text-align:center"><i class="fas fa-grip-lines-vertical" style="font-size:18px"></i></a>'
+            } else if (qr === 'polygon') {
+                type_shp.innerHTML =
+                    '<a style="text-align:center;"><i class="fas fa-draw-polygon" style="font-size:18px"></i></a>'
+            } else {
+                type_shp.innerHTML =
+                    '<a style="text-align:center;font-style: italic;">Null</a>'
+            }
+
+        }
+
+        function alertDelete(elem) {
+            for (let i = 1; i < table.rows.length; i++) {
+                let x = table.rows[i].cells[7]
+                let selector = x.querySelector("a")
+                switch (elem.getAttribute('id')) {
+                    case selector.getAttribute('id'):
+                        sn = selector.getAttribute('id')
+                        modal.style.display = 'block'
+                        break;
+                }
+            }
+        }
+    </script>
+</body>
+
+
+</html>

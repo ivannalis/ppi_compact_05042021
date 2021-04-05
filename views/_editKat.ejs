@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/_adminheaderlink'); %>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin app-header -->
+            <%- include('./partials/_adminheader'); %>
+            <!-- begin app-container -->
+            <div class="app-container">
+                <!-- begin app-nabar -->
+                <%- include('./partials/_adminnav'); %>
+                <!-- begin app-main -->
+                <div class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="container-fluid">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title mb-2 mb-sm-0">
+                                        <h1>Form Update Kategori SHP</h1>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html">
+                                                        <i class="ti ti-home"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Forms
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">
+                                                    Kategori SHP</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div class="card-header">
+                                        <div class="card-heading">
+                                            <h4 class="card-title">Original Kategori</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <input type="hidden" class="form-control" id="deskripsi" name="id"
+                                                value="<%= kategori.id %>" disabled>
+                                            <div class="form-group">
+                                                <label for="Kategori">Kategori Sebelum</label>
+                                                <input type="text" class="form-control" id="Kategori" name="kategori"
+                                                    required="required" value="<%= kategori.kategori %>" disabled>
+                                                <small id="emailHelp" class="form-text text-muted">Kategori
+                                                    digunakan
+                                                    untuk mengelompokan SHP di legenda.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="deskripsi">Deskripsi Sebelum</label>
+                                                <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                                                    value="<%= kategori.deskripsi %>" disabled>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card card-statistics">
+                                    <div class="card-header">
+                                        <div class="card-heading">
+                                            <h4 class="card-title">Update Kategori</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="" method="POST">
+                                            <input type="hidden" class="form-control" id="deskripsi" name="id"
+                                                value="<%= kategori.id %>" disabled>
+                                            <div class="form-group">
+                                                <label for="Kategori">Kategori Update</label>
+                                                <input type="text" class="form-control" id="Kategori"
+                                                    placeholder="Mis. Penutupan Lahan" name="kategori"
+                                                    required="required">
+                                                <small id="emailHelp" class="form-text text-muted">Kategori
+                                                    digunakan
+                                                    untuk mengelompokan SHP di legenda.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="deskripsi">Deskripsi Update</label>
+                                                <input type="text" class="form-control" id="deskripsi"
+                                                    placeholder="Opsional" name="deskripsi">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update
+                                                <i class="lni lni-update"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/_adminfooter'); %>
+        </div>
+    </div>
+</body>
+
+</html>
